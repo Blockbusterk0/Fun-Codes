@@ -46,6 +46,6 @@ int main()
         nextLine();
         printSpace();
         printf(" ");
-        nextLine();
+        nextLine(); //Este codigo printa o texto "bobo na casca do ovo", cada print eh uma linha
     }
 }
