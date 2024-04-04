@@ -1,4 +1,6 @@
-Esses codiguin desenha funcaoes[afim, parabola deitada, senoide deitada].
+Esses codigo desenha funcao[afim, parabola deitada, senoide deitada].
+
+O  mmc faz mmc
 
 Baixe e teste :)
 
