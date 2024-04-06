@@ -2,6 +2,7 @@ Esses codigo desenha funcao[afim, parabola deitada, senoide deitada].
 
 O  mmc faz mmc
 
+O xadrez escreve xadrez
 Baixe e teste :)
 
 
