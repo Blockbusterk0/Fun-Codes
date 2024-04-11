@@ -22,20 +22,21 @@ int main()
     {
         float desenho;
         float y = -a * cos(linha) + b;
-        float printSpace()
+        int printSpace()
         {
-            for (desenho = 0; desenho < y; desenho = desenho + 0.025)
+            for (desenho = 0; desenho < y; desenho = desenho + 0.015)
             {
                 printf(" "); // Espaço
             }
         }
-        float nextLine()
+        int nextLine()
         {
             timer();
             printf("\n");
             linha = linha + 0.1;
             y = -a * cos(linha) + b;
         }
+        
         printSpace();
         printf("o");
         nextLine();
