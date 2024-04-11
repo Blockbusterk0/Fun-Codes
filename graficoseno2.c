@@ -1,51 +1,43 @@
 #include <stdio.h>
 #include <math.h>
 
+int timer()
+{
+    int i;
+    for (i = 1; i < 10000000; i++)
+    {
+
+    }
+}
+
 int main()
 {
     float linha;
-    float a = 0.25;
-    float b = 0.25;
+    float a = 1;
+    float b = 1;
 
     printf("\n");
     linha = 0;
-    while (linha < 12)
+    while (linha < 100000)
     {
         float desenho;
         float y = -a * cos(linha) + b;
         float printSpace()
         {
-            for (desenho = 0; desenho < y; desenho = desenho + 0.05)
+            for (desenho = 0; desenho < y; desenho = desenho + 0.025)
             {
                 printf(" "); // Espaço
             }
         }
         float nextLine()
         {
+            timer();
             printf("\n");
             linha = linha + 0.1;
             y = -a * cos(linha) + b;
         }
         printSpace();
-        printf("bobo");
+        printf("o");
         nextLine();
-        printSpace();
-        printf("na");
-        nextLine();
-        printSpace();
-        printf("casca");
-        nextLine();
-        printSpace();
-        printf("do");
-        nextLine();
-        printSpace();
-        printf("ovo");
-        nextLine();
-        printSpace();
-        printf(" ");
-        nextLine();
-        printSpace();
-        printf(" ");
-        nextLine(); //Este codigo printa o texto "bobo na casca do ovo", cada print eh uma linha
     }
 }
