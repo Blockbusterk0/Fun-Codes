@@ -1,10 +1,8 @@
-Esses codigo desenha funcao[afim, parabola deitada, senoide deitada].
+Esses codigos desenham funcoes[afim, parabola deitada, senoide deitada].
 
 O  mmc faz mmc
 
-O xadrez escreve xadrez
-
-Baixe e teste :)
+O xadrez escreve em padrao xadrez
 
 
 
