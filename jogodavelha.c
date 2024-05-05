@@ -4,6 +4,8 @@
 #include <time.h>
 
 char board[3][3];
+char simbolo_jogador_1 = 'X';
+char simbolo_jogador_2 = 'O';
 
 int sorteio(int limite)
 {
@@ -26,11 +28,43 @@ void jogo_limpar_grade()
 int jogo_numero_jogadores()
 {
     int jogadores;
-    printf("\nEscolha o numero de jogadores     [1]     [2]\n");
+    int config;
     while (jogadores != 1 && jogadores != 2)
     {
+        config = 0;
+        jogadores = 0;
+        printf("\n[1] 1 Jogador     [2] 2 Jogadores     [3] Configuracoes\n");
         scanf("%d", &jogadores);
+        while (jogadores != 1 && jogadores != 2 && jogadores != 3)
+        {
+            scanf("%d", &jogadores);
+        }
+        if (jogadores == 3)
+        {
+            while (config != 3)
+            {
+                printf("\nConfiguracoes:");
+                printf("\n[1] Trocar simbolo jogador 1\t[2] Trocar simbolo jogador 2 / Robo\t[3] Voltar\n");
+                scanf("%d", &config);
+                while (config != 1 && config != 2 && config != 3)
+                {
+                    scanf("%d", &config);
+                }
+                if (config == 1)
+                {
+                    printf("\nEscolha o simbolo do jogador 1: ");
+                    scanf(" %c", &simbolo_jogador_1);
+                }
+                if (config == 2)
+                {
+                    printf("\nEscolha o simbolo do jogador 2 e do Robo: ");
+                    scanf(" %c", &simbolo_jogador_2);
+                }
+            }
+
+        }  
     }
+    
     return jogadores;
 }
 
@@ -57,11 +91,11 @@ int jogo_teste_vitoria()
     {
         if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] == board[i][2])
         {
-            if (board[i][0] == 'X')
+            if (board[i][0] == simbolo_jogador_1)
             {
                 return 1;
             }
-            else if (board[i][0] == 'O')
+            else if (board[i][0] == simbolo_jogador_2)
             {
                 return 2;
             }
@@ -71,11 +105,11 @@ int jogo_teste_vitoria()
     {
         if (board[0][j] == board[1][j] && board[1][j] == board[2][j] && board[0][j] == board[2][j])
         {
-            if (board[0][j] == 'X')
+            if (board[0][j] == simbolo_jogador_1)
             {
                 return 1;
             }
-            else if (board[0][j] == 'O')
+            else if (board[0][j] == simbolo_jogador_2)
             {
                 return 2;
             }
@@ -83,22 +117,22 @@ int jogo_teste_vitoria()
     }
     if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] == board[2][2])
         {
-            if (board[0][0] == 'X')
+            if (board[0][0] == simbolo_jogador_1)
             {
                 return 1;
             }
-            else if (board[0][0] == 'O')
+            else if (board[0][0] == simbolo_jogador_2)
             {
                 return 2;
             }
         }
     if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] == board[2][0])
         {
-            if (board[0][2] == 'X')
+            if (board[0][2] == simbolo_jogador_1)
             {
                 return 1;
             }
-            else if (board[0][2] == 'O')
+            else if (board[0][2] == simbolo_jogador_2)
             {
                 return 2;
             }
@@ -113,10 +147,10 @@ void jogo_jogar_jogador(int jogador)
     switch(jogador)
     {
         case 1:
-            marcador = 'X';
+            marcador = simbolo_jogador_1;
             break;
         case 2:
-            marcador = 'O';
+            marcador = simbolo_jogador_2;
             break;
     }
     printf("Vez do jogador %d.", jogador);
@@ -161,13 +195,12 @@ void jogo_jogar_robo(int jogador)
     switch(jogador)
     {
         case 1:
-            marcador = 'X';
+            marcador = simbolo_jogador_1;
             break;
         case 2:
-            marcador = 'O';
+            marcador = simbolo_jogador_2;
             break;
     }
-    printf("\nAguarde, o robo esta pensando...");
     while (1 == 1)
     {
         input_linha = sorteio(3);
@@ -201,44 +234,39 @@ int main()
     int jogadores;
     int vitoria;
     int empate;
+    int n_vitorias_jogador = 0;
+    int n_vitorias_robo = 0;
+    int n_vitorias_jogador_1 = 0;
+    int n_vitorias_jogador_2 = 0;
+    int n_empates = 0;
+    int n_empates_2 = 0;
+    int jogador_comeca;
     char jogar_novamente;
     while (1 == 1)
     {
         vitoria = 0;
         empate = 0;
-        printf("\n\n\n\n\nJogo da Velha");
+        printf("\n\n\n\n\n\n\n\n\n\nJogo da Velha");
         jogo_limpar_grade();
         jogadores = jogo_numero_jogadores();
         jogo_imprimir_grade();
+        jogador_comeca = sorteio(2);
         if (jogadores == 1)
         {
-            int jogador_comeca = sorteio(2);
             if (jogador_comeca == 0)
             {
                 while (vitoria == 0 && empate == 0)
                 {
-                    jogo_jogar_robo(1);
+                    jogo_jogar_robo(2);
                     vitoria = jogo_teste_vitoria();
                     empate = jogo_teste_empate();
                     if (vitoria != 0 || empate != 0)
                     continue;
-                    jogo_jogar_jogador(2);
+                    jogo_jogar_jogador(1);
                     vitoria = jogo_teste_vitoria();
                     empate = jogo_teste_empate();
                     if (vitoria != 0 || empate != 0)
                     continue;
-                }
-                if (vitoria == 1)
-                {
-                    printf("O robo venceu!");
-                }
-                else if (vitoria == 2)
-                {
-                    printf("Voce venceu!");
-                }
-                else if (empate == 1)
-                {
-                    printf("O jogo empatou!");
                 }
             }
             else if (jogador_comeca == 1)
@@ -256,48 +284,74 @@ int main()
                     if (vitoria != 0 || empate != 0)
                     continue;
                 }
-                if (vitoria == 1)
-                {
-                    printf("Voce venceu!");
-                }
-                else if (vitoria == 2)
-                {
-                    printf("O robo venceu!");
-                }
-                else if (empate == 1)
-                {
-                    printf("O jogo empatou!");
-                }
-
-            }
-        }
-        else if (jogadores == 2)
-        {
-            while (vitoria == 0 && empate == 0)
-            {
-                jogo_jogar_jogador(1);
-                vitoria = jogo_teste_vitoria();
-                empate = jogo_teste_empate();
-                if (vitoria != 0 || empate != 0)
-                continue;
-                jogo_jogar_jogador(2);
-                vitoria = jogo_teste_vitoria();
-                empate = jogo_teste_empate();
-                if (vitoria != 0 || empate != 0)
-                continue;
             }
             if (vitoria == 1)
             {
-                printf("O jogador %d venceu!", vitoria);
+                printf("Voce venceu!");
+                n_vitorias_jogador++;
             }
             else if (vitoria == 2)
             {
-                printf("O jogador %d venceu!", vitoria);
+                printf("O Robo venceu!");
+                n_vitorias_robo++;
             }
             else if (empate == 1)
             {
                 printf("O jogo empatou!");
+                n_empates++;
             }
+            printf("\nVitorias Jogador: %d\tVitorias Robo: %d\tEmpates: %d", n_vitorias_jogador, n_vitorias_robo, n_empates);
+        }
+        else if (jogadores == 2)
+        {
+            if (jogador_comeca == 0)
+            {
+                while (vitoria == 0 && empate == 0)
+                {
+                    jogo_jogar_jogador(2);
+                    vitoria = jogo_teste_vitoria();
+                    empate = jogo_teste_empate();
+                    if (vitoria != 0 || empate != 0)
+                    continue;
+                    jogo_jogar_jogador(1);
+                    vitoria = jogo_teste_vitoria();
+                    empate = jogo_teste_empate();
+                    if (vitoria != 0 || empate != 0)
+                    continue;
+                }
+            }
+            else if (jogador_comeca == 1)
+            {
+                while (vitoria == 0 && empate == 0)
+                {
+                    jogo_jogar_jogador(1);
+                    vitoria = jogo_teste_vitoria();
+                    empate = jogo_teste_empate();
+                    if (vitoria != 0 || empate != 0)
+                    continue;
+                    jogo_jogar_jogador(2);
+                    vitoria = jogo_teste_vitoria();
+                    empate = jogo_teste_empate();
+                    if (vitoria != 0 || empate != 0)
+                    continue;
+                }      
+            }
+            if (vitoria == 1)
+            {
+                printf("O jogador 1 venceu!");
+                n_vitorias_jogador_1++;
+            }
+            else if (vitoria == 2)
+            {
+                printf("O jogador 2 venceu!");
+                n_vitorias_jogador_2++;
+            }
+            else if (empate == 1)
+            {
+                printf("O jogo empatou!");
+                n_empates_2++;
+            }
+            printf("\nVitorias Jogador 1: %d\tVitorias Jogador 2: %d\tEmpates: %d", n_vitorias_jogador_1, n_vitorias_jogador_2, n_empates_2);
         }
         printf("\nDeseja jogar novamente?     [s]     [n]\n");
         scanf("%c", &jogar_novamente);
