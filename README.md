@@ -1,9 +1,4 @@
-Esses codigos desenham funcoes[afim, parabola deitada, senoide deitada].
-
-O  mmc faz mmc
-
-O xadrez escreve em padrao xadrez
-
+Alguns codigos que eu fiz para testar minhas maravilhosas habilidades
 
 
 
