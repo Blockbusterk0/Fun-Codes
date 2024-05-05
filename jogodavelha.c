@@ -6,6 +6,7 @@
 char board[3][3];
 char simbolo_jogador_1 = 'X';
 char simbolo_jogador_2 = 'O';
+int boardskin = 0;
 
 int sorteio(int limite)
 {
@@ -41,12 +42,12 @@ int jogo_numero_jogadores()
         }
         if (jogadores == 3)
         {
-            while (config != 3)
+            while (config != 4)
             {
                 printf("\nConfiguracoes:");
-                printf("\n[1] Trocar simbolo jogador 1\t[2] Trocar simbolo jogador 2 / Robo\t[3] Voltar\n");
+                printf("\n[1] Trocar simbolo jogador 1     [2] Trocar simbolo jogador 2 / Robo     [3] Escolher estilo     [4] Voltar\n");
                 scanf("%d", &config);
-                while (config != 1 && config != 2 && config != 3)
+                while (config != 1 && config != 2 && config != 3 && config != 4)
                 {
                     scanf("%d", &config);
                 }
@@ -59,6 +60,21 @@ int jogo_numero_jogadores()
                 {
                     printf("\nEscolha o simbolo do jogador 2 e do Robo: ");
                     scanf(" %c", &simbolo_jogador_2);
+                }
+                if (config == 3)
+                {
+                    printf("\nEscolha o estilo do jogo: ");
+                    printf("\n[0]             [1]             [2]             [3]");
+                    printf("\n X | O | O       X | O | O       X # O # O       X | O | O ");
+                    printf("\n---|---|---     -------|---     ###########     jogodavelha");
+                    printf("\n O | X | X       O | X | X       O # X # X       O | X | X ");
+                    printf("\n---|---|---     ---|-------     ###########     jogodavelha");
+                    printf("\n O | X | O       O | X | O       O # X # O       O | X | O\n");
+                    scanf("%d", &boardskin);
+                    while (boardskin < 0 || boardskin > 3)
+                    {
+                        scanf(" %d", &boardskin);
+                    }
                 }
             }
 
@@ -220,12 +236,44 @@ void jogo_jogar_robo(int jogador)
 
 void jogo_imprimir_grade()
 {
-    printf("\n\n\n  1   2   3 ");
-    printf("\n1 %c | %c | %c ", board[0][0], board[0][1], board[0][2]);
-    printf("\n -------|---");
-    printf("\n2 %c | %c | %c ", board[1][0], board[1][1], board[1][2]);
-    printf("\n ---|-------");
-    printf("\n3 %c | %c | %c \n", board[2][0], board[2][1], board[2][2]);
+    if (boardskin == 0)
+    {  
+        printf("\n\n\n  1   2   3 ");
+        printf("\n1 %c | %c | %c ", board[0][0], board[0][1], board[0][2]);
+        printf("\n ---|---|---");
+        printf("\n2 %c | %c | %c ", board[1][0], board[1][1], board[1][2]);
+        printf("\n ---|---|---");
+        printf("\n3 %c | %c | %c \n", board[2][0], board[2][1], board[2][2]);
+    }
+    if (boardskin == 1)
+    {  
+        printf("\n\n\n  1   2   3 ");
+        printf("\n1 %c | %c | %c ", board[0][0], board[0][1], board[0][2]);
+        printf("\n -------|---");
+        printf("\n2 %c | %c | %c ", board[1][0], board[1][1], board[1][2]);
+        printf("\n ---|-------");
+        printf("\n3 %c | %c | %c \n", board[2][0], board[2][1], board[2][2]);
+    }
+    if (boardskin == 2)
+    {  
+        printf("\n\n\n  1   2   3 ");
+        printf("\n1 %c # %c # %c ", board[0][0], board[0][1], board[0][2]);
+        printf("\n ###########");
+        printf("\n2 %c | %c | %c ", board[1][0], board[1][1], board[1][2]);
+        printf("\n ###########");
+        printf("\n3 %c # %c # %c \n", board[2][0], board[2][1], board[2][2]);
+    }
+    if (boardskin == 3)
+    {  
+        printf("\n\n\n  1   2   3 ");
+        printf("\n1 %c | %c | %c ", board[0][0], board[0][1], board[0][2]);
+        printf("\n jogodavelha");
+        printf("\n2 %c | %c | %c ", board[1][0], board[1][1], board[1][2]);
+        printf("\n jogodavelha");
+        printf("\n3 %c | %c | %c \n", board[2][0], board[2][1], board[2][2]);
+    }
+
+
 }
 
 int main()
